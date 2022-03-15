@@ -2,7 +2,7 @@
 import os
 import argparse
 import pandas as pd
-from azureml.core import Run
+from azureml.core import Run,Dataset,Workspace
 from sklearn.preprocessing import MinMaxScaler
 
 # Get parameters
@@ -14,11 +14,12 @@ save_folder = args.prepped_data
 
 # Get the experiment run context
 run = Run.get_context()
+ws = run.experiment.workspace
 
 # load the data (passed as an input dataset)
 print("Loading Data...")
-diabetes = run.input_datasets['raw_data'].to_pandas_dataframe()
-
+#diabetes = run.input_datasets['raw_data'].to_pandas_dataframe()
+diabetes =Dataset.get_by_id(ws, id=args.raw_dataset_id).to_pandas_dataframe()
 # Log raw row count
 row_count = (len(diabetes))
 run.log('raw_rows', row_count)

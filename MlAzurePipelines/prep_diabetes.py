@@ -20,13 +20,10 @@ ws = run.experiment.workspace
 # load the data (passed as an input dataset)
 
 print("Loading Data...")
-print('**********')
-#print(run.raw_dataset_id)
-print('**********')
-#diab_ds = args.raw_dataset_id
+
+
 diabetes =Dataset.get_by_id(ws, id=args.raw_dataset_id).to_pandas_dataframe()
-#diabetes = diabetes.to_pandas_dataframe()
-#print(diabetes.take(3).topandas_dataframe())
+
 print("Loading Data complete...")
 print('**********')
 # Log raw row count
